@@ -15,6 +15,7 @@ export async function getAllProducts() {
     return JSON.parse(JSON.stringify(products));
   } catch (error) {
     console.log(error);
+    return [];
   }
 }
 
@@ -29,6 +30,7 @@ export async function getProductsByCategory(category: string) {
     return JSON.parse(JSON.stringify(products));
   } catch (error) {
     console.log(error);
+    return [];
   }
 }
 
@@ -50,6 +52,7 @@ export async function getSearchProducts({ query }: ProductsParams) {
     return JSON.parse(JSON.stringify(products));
   } catch (error) {
     console.log(error);
+    return [];
   }
 }
 
@@ -65,6 +68,7 @@ export async function getLatestProducts({ limit }: { limit: number }) {
     return JSON.parse(JSON.stringify(products));
   } catch (error) {
     console.log(error);
+    return [];
   }
 }
 
@@ -77,5 +81,6 @@ export async function getProductById(id: string) {
     return JSON.parse(JSON.stringify(product));
   } catch (error) {
     console.log(error);
+    return null;
   }
 }
