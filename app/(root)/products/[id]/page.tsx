@@ -8,6 +8,7 @@ import {
 } from "@/lib/actions/product.actions";
 import { Product } from "@/types";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 import React from "react";
 
 type Props = {
@@ -17,6 +18,11 @@ type Props = {
 const ProductDetails = async ({ params: { id } }: Props) => {
   // Product
   const product: Product = await getProductById(id);
+
+  // Si el producto no existe (o falló la consulta), evita el crash y muestra 404.
+  if (!product) {
+    notFound();
+  }
 
   // Related Products
   const relatedProducts = await getLatestProducts({ limit: 4 });
@@ -175,7 +181,7 @@ const ProductDetails = async ({ params: { id } }: Props) => {
           Related Products
         </h2>
         <div className="grid grid-cols-2 gap-2 lg:grid-cols-4 lg:gap-4 mt-5">
-          {relatedProducts.map((product: Product) => (
+          {relatedProducts?.map((product: Product) => (
             <ProductCard key={product._id} product={product} />
           ))}
         </div>
